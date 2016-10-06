@@ -31,7 +31,6 @@ public class Main {
 
         try{
             Calendar calendar = Calendar.getInstance();
-            calendar.setTimeZone(TimeZone.getTimeZone("Europe/Sarajevo"));
             String time;
             while (true){
                 calendar = Calendar.getInstance();
