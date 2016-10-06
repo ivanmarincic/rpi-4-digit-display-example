@@ -17,18 +17,18 @@ public class Main {
         for (int i =0; i<digitsPin.size(); i++){
             digits.add(gpio.provisionDigitalOutputPin(digitsPin.get(i), PinState.LOW));
         }
-        int[][] numbers = {
-            {1,1,1,1,1,1,0}, //0
-            {0,1,1,0,0,0,0}, //1
-            {1,1,0,1,1,0,1}, //2
-            {1,1,1,1,0,0,1}, //3
-            {0,1,1,0,0,1,1}, //4
-            {1,0,1,1,0,1,1}, //5
-            {1,0,1,1,1,1,1}, //6
-            {1,1,1,0,0,0,0}, //7
-            {1,1,1,1,1,1,1}, //8
-            {1,1,1,1,0,1,1}, //9
-        };
+        Map<String, Integer[]> numbers =  new HashMap();
+        numbers.put("0", new Integer[]{1,1,1,1,1,1,0});
+        numbers.put("1", new Integer[]{0,1,1,0,0,0,0});
+        numbers.put("2", new Integer[]{1,1,0,1,1,0,1});
+        numbers.put("3", new Integer[]{1,1,1,1,0,0,1});
+        numbers.put("4", new Integer[]{0,1,1,0,0,1,1});
+        numbers.put("5", new Integer[]{1,0,1,1,0,1,1});
+        numbers.put("6", new Integer[]{1,0,1,1,1,1,1});
+        numbers.put("7", new Integer[]{1,1,1,0,0,0,0});
+        numbers.put("8", new Integer[]{1,1,1,1,1,1,1});
+        numbers.put("9", new Integer[]{1,1,1,1,0,1,1});
+
         try{
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeZone(TimeZone.getTimeZone("Europe/Sarajevo"));
@@ -39,7 +39,7 @@ public class Main {
                 for(int i=0; i<digits.size(); i++){
                     for(int j=0; j<segments.size()-1; j++){
                         segments.get(j).low();
-                        if(numbers[Integer.parseInt(String.valueOf(time.charAt(i)))][j] == 1){
+                        if(numbers.get(String.valueOf(time.charAt(i)))[j] == 1){
                             segments.get(j).high();
                         }
                         if(i==1){
@@ -48,7 +48,6 @@ public class Main {
                             segments.get(7).low();
                         }
                     }
-                    digits.get(i).low();
                     digits.get(i).high();
                 }
             }
